@@ -1,0 +1,2 @@
+# NewsApp
+Positive news app

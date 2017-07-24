@@ -10,6 +10,30 @@ public class RedditPost
 	private int upvotes;
 	private String thumbnail_url;
 	private String domain_url;
+	public String getAuthor()
+	{
+		return this.author;
+	}
+	public String getTitle()
+	{
+		return this.title;
+	}
+	public String getDatetime()
+	{
+		return this.datetime;
+	}
+	public int getUpvotes()
+	{
+		return this.upvotes;
+	}
+	public String getThumbnailUrl()
+	{
+		return this.thumbnail_url;
+	}
+	public String getDomainUrl()
+	{
+		return this.domain_url;
+	}
 	public String toString()
 	{
 		return "RedditPost by " + author + " titled " + title + "; posted on " + datetime + " and has " + upvotes + " upvotes";

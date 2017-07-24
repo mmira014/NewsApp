@@ -9,8 +9,8 @@ import org.jsoup.select.Elements;
 
 public class NewsAppResponse
 {
-	Document doc;
-	String toURL;
+	private Document doc;
+	private String toURL;
 	ArrayList<RedditPost> posts;
 	
 	
@@ -27,6 +27,10 @@ public class NewsAppResponse
 		{
 			e.printStackTrace();
 		}
+	}
+	public String getURL()
+	{
+		return toURL;
 	}
 	public String getHTMLResponseString()
 	{

@@ -1,6 +1,7 @@
 package versionTrevor;
-import java.net.*;
+//import java.net.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.io.*;
 import org.jsoup.*;
 import org.jsoup.nodes.*;
@@ -12,7 +13,6 @@ public class NewsAppResponse
 	private Document doc;
 	private String toURL;
 	ArrayList<RedditPost> posts;
-	
 	
 	public NewsAppResponse(String url)
 	{
@@ -78,13 +78,19 @@ public class NewsAppResponse
 		return posts;
 	}
 	
+	public int getNumberOfPosts()
+	{
+		return posts.size();
+	}
+	
 	
     public static void main(String[] args) throws Exception {
     	NewsAppResponse n = new NewsAppResponse("https://www.reddit.com/r/UpliftingNews/");
     	n.loadPosts();
+    	Collections.sort(n.getAllPosts(), new CompareRedditPost());
     	for (RedditPost p : n.posts)
     	{
-    		System.out.println(p);
+    		System.out.println(p.getTitle()+ " has " +  p.getUpvotes() + " upvotes");
     	}
     	
 //    	//URL url = new URL("https://www.reddit.com/r/UpliftingNews/.json");
@@ -153,3 +159,6 @@ public class NewsAppResponse
     }
 
 }
+
+
+

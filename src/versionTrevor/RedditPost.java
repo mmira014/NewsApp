@@ -1,6 +1,6 @@
 package versionTrevor;
 import java.util.regex.*;
-
+import java.util.Comparator;
 public class RedditPost
 {
 	private String author;
@@ -10,6 +10,7 @@ public class RedditPost
 	private int upvotes;
 	private String thumbnail_url;
 	private String domain_url;
+	
 	public String getAuthor()
 	{
 		return this.author;
@@ -25,6 +26,10 @@ public class RedditPost
 	public int getUpvotes()
 	{
 		return this.upvotes;
+	}
+	public String getUrl()
+	{
+		return this.url;
 	}
 	public String getThumbnailUrl()
 	{
@@ -67,4 +72,13 @@ public class RedditPost
 		test.retrieveDomain();
 	}
 
+}
+
+class CompareRedditPost implements Comparator<RedditPost>
+{
+	@Override
+	public int compare(RedditPost p1, RedditPost p2)
+	{
+		return p1.getUpvotes() > p2.getUpvotes() ? -1 : (p1.getUpvotes() < p2.getUpvotes() ? 1 : 0);
+	}
 }

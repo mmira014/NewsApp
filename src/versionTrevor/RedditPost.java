@@ -10,6 +10,7 @@ public class RedditPost
 	private int upvotes;
 	private String thumbnail_url;
 	private String domain_url;
+        private Boolean is_liked;
 	
 	public String getAuthor()
 	{
@@ -43,6 +44,10 @@ public class RedditPost
 	{
 		return "RedditPost by " + author + " titled " + title + "; posted on " + datetime + " and has " + upvotes + " upvotes";
 	}
+        public Boolean getLikeStatus()
+        {
+            return is_liked;
+        }
 	private void retrieveDomain()
 	{
 		String domainPat = "\\(([^\\)]+)\\)";
@@ -64,7 +69,8 @@ public class RedditPost
 		this.url = url;
 		this.datetime = datetime;
 		this.upvotes = upvotes;
-		this.thumbnail_url = thumbnail_url;
+		this.thumbnail_url = "http://" + thumbnail_url;
+                this.is_liked = false;
 	}
 	public static void main(String[] args) throws Exception {
 		RedditPost test = new RedditPost("a", "Dog revived with oxygen after rescue from burning house gets visit from hero firefighter (usatoday.com)", "c", "d", 5, "e");

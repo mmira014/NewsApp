@@ -90,7 +90,8 @@ public class NewsAppResponse
     	Collections.sort(n.getAllPosts(), new CompareRedditPost());
     	for (RedditPost p : n.posts)
     	{
-    		System.out.println(p.getTitle()+ " has " +  p.getUpvotes() + " upvotes");
+    		//System.out.println(p.getTitle()+ " has " +  p.getUpvotes() + " upvotes");
+            System.out.println(p.getTitle() +  " + posted " + p.getDatetime());
     	}
     	
 //    	//URL url = new URL("https://www.reddit.com/r/UpliftingNews/.json");

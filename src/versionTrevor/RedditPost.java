@@ -72,11 +72,12 @@ public class RedditPost
 		this.thumbnail_url = "http://" + thumbnail_url;
                 this.is_liked = false;
 	}
-	public static void main(String[] args) throws Exception {
-		RedditPost test = new RedditPost("a", "Dog revived with oxygen after rescue from burning house gets visit from hero firefighter (usatoday.com)", "c", "d", 5, "e");
-		System.out.println(test.title);
-		test.retrieveDomain();
-	}
+        
+//	public static void main(String[] args) throws Exception {
+//		RedditPost test = new RedditPost("a", "Dog revived with oxygen after rescue from burning house gets visit from hero firefighter (usatoday.com)", "c", "d", 5, "e");
+//		System.out.println(test.title);
+//		test.retrieveDomain();
+//	}
 
 }
 

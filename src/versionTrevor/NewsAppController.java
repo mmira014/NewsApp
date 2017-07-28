@@ -126,6 +126,14 @@ public class NewsAppController {
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("likedCheckButton pressed.");
+                System.out.println("Check button check status: " + likedCheckBox.isSelected());
+            }
+        });
+        browserLink.setOnAction(new EventHandler<ActionEvent>() {
+            
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("browserLink pressed; open URL in browser");
             }
         });
         

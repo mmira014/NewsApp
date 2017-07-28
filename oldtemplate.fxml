@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<ScrollPane fx:id="scrollPaneForPost" hbarPolicy="ALWAYS" hmax="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="NewsApp.NewsAppController">
+  <content>
+    <AnchorPane fx:id="displayAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="385.0" prefWidth="599.0">
+         <children>
+            <TextArea fx:id="newsTitle" layoutX="121.0" layoutY="15.0" prefHeight="79.0" prefWidth="358.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. " wrapText="true">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </TextArea>
+            <ImageView fx:id="previousPostThumbnail" fitHeight="150.0" fitWidth="280.0" layoutX="182.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="currentPostThumbnail" fitHeight="66.0" fitWidth="102.0" layoutX="14.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="futurePostThumbnail" fitHeight="80.0" fitWidth="118.0" layoutX="467.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true" />
+            <TextField fx:id="metadataAndTime" layoutX="194.0" layoutY="313.0" prefHeight="25.0" prefWidth="211.0" text="metadata" />
+            <TextField fx:id="disclaimerText" layoutX="14.0" layoutY="346.0" prefHeight="25.0" prefWidth="368.0" text="THIS IS A SIDE PROJECT THAT WEB SCRAPES FROM REDDIT" />
+            <MenuButton fx:id="dropdownMenu" layoutX="7.0" layoutY="2.0" mnemonicParsing="false" text="View">
+              <items>
+                <MenuItem fx:id="postedToday" mnemonicParsing="false" text="Today's News" />
+                <MenuItem fx:id="likedPosts" mnemonicParsing="false" text="Liked news articles(work on it later)" />
+              </items>
+            </MenuButton>
+            <TextField fx:id="currentDateTime" layoutX="436.0" layoutY="346.0" text="datetime" />
+            <Hyperlink fx:id="browserLink" layoutX="183.0" layoutY="270.0" prefHeight="23.0" prefWidth="235.0" text="Open in web browser" />
+         </children></AnchorPane>
+  </content>
+</ScrollPane>

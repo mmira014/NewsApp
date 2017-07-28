@@ -11,12 +11,12 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 
 
-<Pane fx:id="masterWindowPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="versionTrevor.NewsAppController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="versionTrevor.NewsAppController">
    <children>
-      <AnchorPane fx:id="displayAnchorPane" layoutX="10.0" layoutY="10.0" minHeight="0.0" minWidth="0.0" prefHeight="385.0" prefWidth="599.0">
+      <AnchorPane fx:id="displayAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="385.0" prefWidth="599.0">
          <children>
             <TextArea fx:id="newsTitle" editable="false" layoutX="121.0" layoutY="15.0" prefHeight="79.0" prefWidth="358.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. " wrapText="true">
                <padding>
@@ -25,17 +25,17 @@
             </TextArea>
             <ImageView fx:id="currentPostThumbnail" fitHeight="150.0" fitWidth="280.0" layoutX="182.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@src/versionTrevor/h.jpg" />
+                  <Image url="@h.jpg" />
                </image>
             </ImageView>
             <ImageView fx:id="previousPostThumbnail" fitHeight="80.0" fitWidth="130.0" layoutX="14.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@src/versionTrevor/h.jpg" />
+                  <Image url="@h.jpg" />
                </image>
             </ImageView>
             <ImageView fx:id="futurePostThumbnail" fitHeight="80.0" fitWidth="130.0" layoutX="465.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@src/versionTrevor/h.jpg" />
+                  <Image url="@h.jpg" />
                </image>
             </ImageView>
             <TextField fx:id="metadataAndTime" alignment="CENTER" editable="false" layoutX="9.0" layoutY="313.0" prefHeight="25.0" prefWidth="578.0" text="metadata" />
@@ -54,4 +54,4 @@
          </children>
       </AnchorPane>
    </children>
-</Pane>
+</StackPane>

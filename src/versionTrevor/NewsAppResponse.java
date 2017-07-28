@@ -87,12 +87,14 @@ public class NewsAppResponse
     public static void main(String[] args) throws Exception {
     	NewsAppResponse n = new NewsAppResponse("https://www.reddit.com/r/UpliftingNews/");
     	n.loadPosts();
-    	Collections.sort(n.getAllPosts(), new CompareRedditPost());
+    	//Collections.sort(n.getAllPosts(), new CompareRedditPost());
     	for (RedditPost p : n.posts)
     	{
     		//System.out.println(p.getTitle()+ " has " +  p.getUpvotes() + " upvotes");
             System.out.println(p.getTitle() +  " + posted " + p.getDatetime());
+            System.out.println("RedditPost #" + p.getPostNumber() + " + posted " + p.getDatetime());
     	}
+        System.out.println(n.getNumberOfPosts());
     	
 //    	//URL url = new URL("https://www.reddit.com/r/UpliftingNews/.json");
 //    	NewsAppResponse htmlResult = new NewsAppResponse("https://www.reddit.com/r/UpliftingNews/");

@@ -3,6 +3,8 @@ import java.util.regex.*;
 import java.util.Comparator;
 public class RedditPost
 {
+        private static int postCount = 0;
+        private int postNumber = 0;
 	private String author;
 	private String title;
 	private String url;
@@ -11,7 +13,10 @@ public class RedditPost
 	private String thumbnail_url;
 	private String domain_url;
         private Boolean is_liked;
-	
+	public int getPostNumber()
+        {
+            return postNumber;
+        }
 	public String getAuthor()
 	{
 		return this.author;
@@ -48,16 +53,20 @@ public class RedditPost
         {
             return is_liked;
         }
+        public static int getNumberOfPosts()
+        {
+            return postCount;
+        }
 	private void retrieveDomain()
 	{
 		String domainPat = "\\(([^\\)]+)\\)";
 		Pattern p = Pattern.compile(domainPat);
 		Matcher m = p.matcher(title);
 		if (m.find()) {   
-			  System.out.println(m.group(1));
+			  //System.out.println(m.group(1));
 			  this.domain_url = m.group(1);
 			  this.title = this.title.replace("(" + domain_url + ")", "");
-			  System.out.println(title);
+			  //System.out.println(title);
 		}
 		
 		//regex \(([^\)]+)\); compile and match
@@ -69,8 +78,10 @@ public class RedditPost
 		this.url = url;
 		this.datetime = datetime;
 		this.upvotes = upvotes;
-		this.thumbnail_url = "http://" + thumbnail_url;
+		this.thumbnail_url = "http:" + thumbnail_url;
                 this.is_liked = false;
+                this.retrieveDomain();
+                this.postNumber = ++postCount;
 	}
         
 //	public static void main(String[] args) throws Exception {

@@ -1,107 +1,119 @@
 /**
- * Sample Skeleton for 'template.fxml' Controller Class
+ * Sample Skeleton for 'fixedtemplate.fxml' Controller Class
  */
 
 package versionTrevor;
 
 import java.net.URL;
 import java.util.Collections;
-import javafx.event.ActionEvent;
 import java.util.ResourceBundle;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import java.lang.Math;
-import javafx.event.EventHandler;
+import javafx.scene.layout.GridPane;
 
 public class NewsAppController {
     private int currentPostIndex = 0;
+    public static int numLiked = 0;
+    
     NewsAppResponse n = new NewsAppResponse("https://www.reddit.com/r/UpliftingNews/");
+    
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
 
     @FXML // URL location of the FXML file that was given to the FXMLLoader
     private URL location;
 
-    @FXML
-    private Pane masterWindowPane;
+    @FXML // fx:id="masterWindowPane"
+    private GridPane masterWindowPane; // Value injected by FXMLLoader
 
-    @FXML
-    private AnchorPane displayAnchorPane;
+    @FXML // fx:id="currentPostThumbnail"
+    private ImageView currentPostThumbnail; // Value injected by FXMLLoader
 
-    @FXML
-    private TextArea newsTitle;
+    @FXML // fx:id="previousPostThumbnail"
+    private ImageView previousPostThumbnail; // Value injected by FXMLLoader
 
-    @FXML
-    private ImageView currentPostThumbnail;
+    @FXML // fx:id="futurePostThumbnail"
+    private ImageView futurePostThumbnail; // Value injected by FXMLLoader
 
-    @FXML
-    private ImageView previousPostThumbnail;
+    @FXML // fx:id="previousArticleButton"
+    private Button previousArticleButton; // Value injected by FXMLLoader
 
-    @FXML
-    private ImageView futurePostThumbnail;
+    @FXML // fx:id="nextArticleButton"
+    private Button nextArticleButton; // Value injected by FXMLLoader
 
-    @FXML
-    private TextField metadataAndTime;
+    @FXML // fx:id="browserLink"
+    private Hyperlink browserLink; // Value injected by FXMLLoader
 
-    @FXML
-    private TextField disclaimerText;
-
-    @FXML
-    private MenuButton dropdownMenu;
-
-    @FXML
-    private MenuItem postedToday;
-
-    @FXML
-    private MenuItem likedPosts;
-
-    @FXML
-    private TextField currentDateTime;
-
-    @FXML
-    private Hyperlink browserLink;
-
-    @FXML
-    private Button previousArticleButton;
-
-    @FXML
-    private Button nextArticleButton;
-
-    @FXML
+    @FXML // fx:id="likedCheckBox"
     private CheckBox likedCheckBox; // Value injected by FXMLLoader
+
+    @FXML // fx:id="redditLink"
+    private Hyperlink redditLink; // Value injected by FXMLLoader
+
+    @FXML // fx:id="previousPostTitle"
+    private Label previousPostTitle; // Value injected by FXMLLoader
+
+    @FXML // fx:id="newsTitle"
+    private Label newsTitle; // Value injected by FXMLLoader
+
+    @FXML // fx:id="futurePostTitle"
+    private Label futurePostTitle; // Value injected by FXMLLoader
+
+    @FXML // fx:id="dropdownMenu"
+    private MenuButton dropdownMenu; // Value injected by FXMLLoader
+
+    @FXML // fx:id="postedToday"
+    private MenuItem postedToday; // Value injected by FXMLLoader
+
+    @FXML // fx:id="likedPosts"
+    private MenuItem likedPosts; // Value injected by FXMLLoader
+
+    @FXML // fx:id="aboutThisApp"
+    private MenuItem aboutThisApp; // Value injected by FXMLLoader
+
+    @FXML // fx:id="randomQuote"
+    private Label randomQuote; // Value injected by FXMLLoader
+
+    @FXML // fx:id="happyYeezy"
+    private ImageView happyYeezy; // Value injected by FXMLLoader
+
+    @FXML // fx:id="metadataAndTime"
+    private Label metadataAndTime; // Value injected by FXMLLoader
+
+    @FXML // fx:id="newsSelection"
+    private Label newsSelection; // Value injected by FXMLLoader
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
-        System.out.println("initialize()");
-        assert masterWindowPane != null : "fx:id=\"masterWindowPane\" was not injected: check your FXML file 'template.fxml'.";
-        assert displayAnchorPane != null : "fx:id=\"displayAnchorPane\" was not injected: check your FXML file 'template.fxml'.";
-        assert newsTitle != null : "fx:id=\"newsTitle\" was not injected: check your FXML file 'template.fxml'.";
-        assert currentPostThumbnail != null : "fx:id=\"currentPostThumbnail\" was not injected: check your FXML file 'template.fxml'.";
-        assert previousPostThumbnail != null : "fx:id=\"previousPostThumbnail\" was not injected: check your FXML file 'template.fxml'.";
-        assert futurePostThumbnail != null : "fx:id=\"futurePostThumbnail\" was not injected: check your FXML file 'template.fxml'.";
-        assert metadataAndTime != null : "fx:id=\"metadataAndTime\" was not injected: check your FXML file 'template.fxml'.";
-        assert disclaimerText != null : "fx:id=\"disclaimerText\" was not injected: check your FXML file 'template.fxml'.";
-        assert dropdownMenu != null : "fx:id=\"dropdownMenu\" was not injected: check your FXML file 'template.fxml'.";
-        assert postedToday != null : "fx:id=\"postedToday\" was not injected: check your FXML file 'template.fxml'.";
-        assert likedPosts != null : "fx:id=\"likedPosts\" was not injected: check your FXML file 'template.fxml'.";
-        assert currentDateTime != null : "fx:id=\"currentDateTime\" was not injected: check your FXML file 'template.fxml'.";
-        assert browserLink != null : "fx:id=\"browserLink\" was not injected: check your FXML file 'template.fxml'.";
-        assert previousArticleButton != null : "fx:id=\"previousArticleButton\" was not injected: check your FXML file 'template.fxml'.";
-        assert nextArticleButton != null : "fx:id=\"nextArticleButton\" was not injected: check your FXML file 'template.fxml'.";
-        assert likedCheckBox != null : "fx:id=\"likedCheckBox\" was not injected: check your FXML file 'template.fxml'.";
+        assert masterWindowPane != null : "fx:id=\"masterWindowPane\" was not injected: check your FXML file 'fixedtemplate.fxml'.";
+        assert currentPostThumbnail != null : "fx:id=\"currentPostThumbnail\" was not injected: check your FXML file 'fixedtemplate.fxml'.";
+        assert previousPostThumbnail != null : "fx:id=\"previousPostThumbnail\" was not injected: check your FXML file 'fixedtemplate.fxml'.";
+        assert futurePostThumbnail != null : "fx:id=\"futurePostThumbnail\" was not injected: check your FXML file 'fixedtemplate.fxml'.";
+        assert previousArticleButton != null : "fx:id=\"previousArticleButton\" was not injected: check your FXML file 'fixedtemplate.fxml'.";
+        assert nextArticleButton != null : "fx:id=\"nextArticleButton\" was not injected: check your FXML file 'fixedtemplate.fxml'.";
+        assert browserLink != null : "fx:id=\"browserLink\" was not injected: check your FXML file 'fixedtemplate.fxml'.";
+        assert likedCheckBox != null : "fx:id=\"likedCheckBox\" was not injected: check your FXML file 'fixedtemplate.fxml'.";
+        assert redditLink != null : "fx:id=\"redditLink\" was not injected: check your FXML file 'fixedtemplate.fxml'.";
+        assert previousPostTitle != null : "fx:id=\"previousPostTitle\" was not injected: check your FXML file 'fixedtemplate.fxml'.";
+        assert newsTitle != null : "fx:id=\"newsTitle\" was not injected: check your FXML file 'fixedtemplate.fxml'.";
+        assert futurePostTitle != null : "fx:id=\"futurePostTitle\" was not injected: check your FXML file 'fixedtemplate.fxml'.";
+        assert dropdownMenu != null : "fx:id=\"dropdownMenu\" was not injected: check your FXML file 'fixedtemplate.fxml'.";
+        assert postedToday != null : "fx:id=\"postedToday\" was not injected: check your FXML file 'fixedtemplate.fxml'.";
+        assert likedPosts != null : "fx:id=\"likedPosts\" was not injected: check your FXML file 'fixedtemplate.fxml'.";
+        assert aboutThisApp != null : "fx:id=\"aboutThisApp\" was not injected: check your FXML file 'fixedtemplate.fxml'.";
+        assert randomQuote != null : "fx:id=\"randomQuote\" was not injected: check your FXML file 'fixedtemplate.fxml'.";
+        assert happyYeezy != null : "fx:id=\"happyYeezy\" was not injected: check your FXML file 'fixedtemplate.fxml'.";
+        assert metadataAndTime != null : "fx:id=\"metadataAndTime\" was not injected: check your FXML file 'fixedtemplate.fxml'.";
+        assert newsSelection != null : "fx:id=\"newsSelection\" was not injected: check your FXML file 'fixedtemplate.fxml'.";
         System.out.println("variables loaded");
         //NewsAppResponse n = new NewsAppResponse("https://www.reddit.com/r/UpliftingNews/");
         //System.out.println(n.posts.toString());
@@ -135,6 +147,11 @@ public class NewsAppController {
             public void handle(ActionEvent event) {
                 System.out.println("browserLink pressed; open URL in browser");
             }
+        });
+        likedPosts.setOnAction(e -> 
+                {
+                    System.out.println("clicked on liked posts archive");
+                    LikedPosts.display("Liked Posts Archive");
         });
         
         refreshPosts();
@@ -176,12 +193,8 @@ public class NewsAppController {
         System.out.println("end of refreshPosts()\n------------");
     }
     
-    
-    
-    
     public NewsAppController()
     {
         System.out.println("NewsAppController()");
     }
 }
-//need to lock text AND center it

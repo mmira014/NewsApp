@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="versionTrevor.NewsAppController">
+<GridPane fx:id="masterWindowPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="versionTrevor.NewsAppController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -46,24 +46,24 @@
       <Hyperlink fx:id="browserLink" alignment="CENTER" prefHeight="23.0" prefWidth="235.0" text="Open article in web browser" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
       <CheckBox fx:id="likedCheckBox" mnemonicParsing="false" text="Like this article" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM" />
       <Hyperlink fx:id="redditLink" alignment="CENTER" prefHeight="34.0" prefWidth="192.0" text="r/UpliftingNews for more" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="BOTTOM" />
-      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="127.0" prefWidth="268.0" text="title" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="127.0" prefWidth="268.0" text="title" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="127.0" prefWidth="268.0" text="title" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+      <Label fx:id="previousPostTitle" alignment="CENTER" contentDisplay="CENTER" prefHeight="127.0" prefWidth="268.0" text="title" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+      <Label fx:id="newsTitle" alignment="CENTER" contentDisplay="CENTER" prefHeight="127.0" prefWidth="268.0" text="title" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <Label fx:id="futurePostTitle" alignment="CENTER" contentDisplay="CENTER" prefHeight="127.0" prefWidth="268.0" text="title" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
       <MenuButton fx:id="dropdownMenu" mnemonicParsing="false" prefHeight="25.0" prefWidth="132.0" text="View" GridPane.valignment="TOP">
          <items>
             <MenuItem fx:id="postedToday" mnemonicParsing="false" text="Today's News" />
             <MenuItem fx:id="likedPosts" mnemonicParsing="false" text="Liked news articles(work on it later)" />
-            <MenuItem fx:id="postedToday1" mnemonicParsing="false" text="About" />
+            <MenuItem fx:id="aboutThisApp" mnemonicParsing="false" text="About" />
          </items>
       </MenuButton>
-      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="127.0" prefWidth="268.0" text="Sample random quote" wrapText="true" GridPane.columnIndex="1" />
-      <ImageView fx:id="currentPostThumbnail1" fitHeight="112.0" fitWidth="203.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+      <Label fx:id="randomQuote" alignment="CENTER" contentDisplay="CENTER" prefHeight="127.0" prefWidth="268.0" text="Sample random quote" wrapText="true" GridPane.columnIndex="1" />
+      <ImageView fx:id="happyYeezy" fitHeight="112.0" fitWidth="203.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <image>
-            <Image url="@h.jpg" />
+            <Image url="@yeezy.jpg" />
          </image>
       </ImageView>
-      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="49.0" prefWidth="267.0" text="metadata" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+      <Label fx:id="metadataAndTime" alignment="CENTER" contentDisplay="CENTER" prefHeight="49.0" prefWidth="267.0" text="metadata" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
       <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="43.0" prefWidth="267.0" text="*posts are aggregated from Reddit.com" wrapText="true" GridPane.rowIndex="4" />
-      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="71.0" prefWidth="209.0" text="Currently showing: Today's posts" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+      <Label fx:id="newsSelection" alignment="CENTER" contentDisplay="CENTER" prefHeight="71.0" prefWidth="209.0" text="Currently showing: Today's posts" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
    </children>
 </GridPane>

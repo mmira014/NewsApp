@@ -11,7 +11,7 @@ public class NewsAppMain extends Application
     @Override
     public void start(Stage stage) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("template2.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("fixedtemplate.fxml"));
         
         System.out.println("loaded template.fxml");
         Scene scene = new Scene(root);

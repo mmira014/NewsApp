@@ -13,6 +13,7 @@ public class NewsAppResponse
 	private Document doc;
 	private String toURL;
 	ArrayList<RedditPost> posts;
+        ArrayList<RedditPost> likedPosts;
 	
 	public NewsAppResponse(String url)
 	{
@@ -42,6 +43,10 @@ public class NewsAppResponse
 		return this.doc;
 		
 	}
+        public void addLikedPost(RedditPost p)
+        {
+            likedPosts.add(p);
+        }
 	public void loadPosts()
 	{
 		posts = new ArrayList<RedditPost>();

@@ -19,7 +19,8 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 public class NewsAppController {
     private int currentPostIndex = 0;
     public static int numLiked = 0;
@@ -119,6 +120,8 @@ public class NewsAppController {
         //System.out.println(n.posts.toString());
     	n.loadPosts();
     	Collections.sort(n.getAllPosts(), new CompareRedditPost());
+        LocalDate localDate = LocalDate.now();
+        newsSelection.setText("Today is " + DateTimeFormatter.ofPattern("yyy/MM/dd").format(localDate));
         previousArticleButton.setOnAction(new EventHandler<ActionEvent>() {
             
             @Override

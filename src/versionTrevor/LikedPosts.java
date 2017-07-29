@@ -1,5 +1,6 @@
 package versionTrevor;
 
+import java.util.ArrayList;
 import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;
 import javafx.stage.*;
@@ -7,6 +8,11 @@ import javafx.scene.control.*;
 import javafx.scene.Scene;
 
 public class LikedPosts {
+    private ArrayList<RedditPost> likedPostArray;
+    public void addLikedPost(RedditPost p)
+    {
+        likedPostArray.add(p);
+    }
     public static void display(String title)
     {
         Stage window = new Stage();

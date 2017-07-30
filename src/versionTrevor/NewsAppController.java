@@ -21,11 +21,18 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.awt.Desktop;
+import java.net.URI;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.Random;
+
 public class NewsAppController {
     private int currentPostIndex = 0;
     public static int numLiked = 0;
+    private Boolean debug = false;
     
-    NewsAppResponse n = new NewsAppResponse("https://www.reddit.com/r/UpliftingNews/");
+    NewsAppResponse n = new NewsAppResponse("https://www.reddit.com/r/UpliftingNews");
     
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
@@ -95,6 +102,8 @@ public class NewsAppController {
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
+        n.loadPosts();
+        assert n.getNumberOfPosts() > 0 : "That can't be right. Are you connected to the internet?";
         assert masterWindowPane != null : "fx:id=\"masterWindowPane\" was not injected: check your FXML file 'fixedtemplate.fxml'.";
         assert currentPostThumbnail != null : "fx:id=\"currentPostThumbnail\" was not injected: check your FXML file 'fixedtemplate.fxml'.";
         assert previousPostThumbnail != null : "fx:id=\"previousPostThumbnail\" was not injected: check your FXML file 'fixedtemplate.fxml'.";
@@ -118,7 +127,10 @@ public class NewsAppController {
         System.out.println("variables loaded");
         //NewsAppResponse n = new NewsAppResponse("https://www.reddit.com/r/UpliftingNews/");
         //System.out.println(n.posts.toString());
-    	n.loadPosts();
+    	//n.loadPosts();
+        Random Dice = new Random();
+        int randIndex = Dice.nextInt(n.quotes.size());
+        randomQuote.setText(n.quotes.get(randIndex));
     	Collections.sort(n.getAllPosts(), new CompareRedditPost());
         LocalDate localDate = LocalDate.now();
         newsSelection.setText("Today is " + DateTimeFormatter.ofPattern("yyy/MM/dd").format(localDate));
@@ -127,6 +139,17 @@ public class NewsAppController {
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("previousArticleButton pressed.");
+                if (currentPostIndex-1 < 0)
+                {
+                    System.out.println("Possible index error at previousArticleButton()");
+                    currentPostIndex = n.getNumberOfPosts()-1;
+                }
+                else
+                {
+                    --currentPostIndex;
+                }
+                System.out.println("currentPostIndex is " + currentPostIndex);
+                refreshPosts();
             }
         });
         nextArticleButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -134,6 +157,17 @@ public class NewsAppController {
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("nextArticleButton pressed.");
+                if (currentPostIndex+1 >= n.getNumberOfPosts())
+                {
+                    System.out.println("Possible index error at nextArticleButton()");
+                    currentPostIndex = 0;
+                }
+                else
+                {
+                    ++currentPostIndex;
+                }
+                System.out.println("currentPostIndex is " + currentPostIndex);
+                refreshPosts();
             }
         });
         likedCheckBox.setOnAction(new EventHandler<ActionEvent>() {
@@ -149,6 +183,37 @@ public class NewsAppController {
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("browserLink pressed; open URL in browser");
+                try
+                {
+                    Desktop.getDesktop().browse(new URI(n.posts.get(currentPostIndex).getUrl()));
+                }
+                catch(IOException e1)
+                {
+                    e1.printStackTrace();
+                }
+                catch(URISyntaxException e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+        });
+        redditLink.setOnAction(new EventHandler<ActionEvent>() {
+            
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("redditLink pressed; open URL in browser");
+                try
+                {
+                    Desktop.getDesktop().browse(new URI("https://www.reddit.com/r/UpliftingNews/"));
+                }
+                catch(IOException e1)
+                {
+                    e1.printStackTrace();
+                }
+                catch(URISyntaxException e1)
+                {
+                    e1.printStackTrace();
+                }
             }
         });
         likedPosts.setOnAction(e -> 
@@ -167,32 +232,60 @@ public class NewsAppController {
         System.out.println("Calling refreshposts()");
         RedditPost currentPost = n.posts.get(currentPostIndex);
         this.newsTitle.setText(currentPost.getTitle());
-        System.out.println(currentPost.getThumbnailUrl());
-        this.currentPostThumbnail.setImage(new Image(currentPost.getThumbnailUrl()));
+        System.out.println("->" + currentPost.getThumbnailUrl() + "<-");
+        if (currentPost.getThumbnailUrl() == "http:")
+        {
+            System.out.println("yeah boi");
+            this.currentPostThumbnail.setImage(new Image("http://i.imgur.com/S6uyoKG.jpg"));
+        }
+        else
+        {
+            this.currentPostThumbnail.setImage(new Image(currentPost.getThumbnailUrl()));
+        }
+        //this.currentPostThumbnail.setImage(new Image(currentPost.getThumbnailUrl()));
         this.metadataAndTime.setText(currentPost.getUpvotes() + " upvotes; posted " + currentPost.getDatetime());
         int previousIndex = currentPostIndex - 1;
         int futureIndex = currentPostIndex + 1;
         if (previousIndex == -1)
         {
-            this.previousPostThumbnail.setImage(new Image("http://i.imgur.com/S6uyoKG.jpg"));
+            previousIndex = n.getNumberOfPosts()-1;
         }
-        else
-        {
-            System.out.println("\npreviousPostIndex: " + (currentPostIndex-1));
-            RedditPost previousPost = n.posts.get(currentPostIndex-1);
-            this.previousPostThumbnail.setImage(new Image(previousPost.getThumbnailUrl()));
-        }
+        System.out.println("\npreviousPostIndex: " + (previousIndex));
+        RedditPost previousPost = n.posts.get(previousIndex);
+        this.previousPostThumbnail.setImage(new Image(previousPost.getThumbnailUrl()));
+        this.previousPostTitle.setText(previousPost.getTitle());
+
         if (futureIndex == n.getNumberOfPosts())
         {
             
-            this.futurePostThumbnail.setImage(new Image("http://i.imgur.com/S6uyoKG.jpg"));
+            futureIndex = 0;
         }
-        else
-        {
-            System.out.println("\nfuturePostIndex: " + (currentPostIndex+1));
-            RedditPost futurePost = n.posts.get(currentPostIndex+1);
-            this.futurePostThumbnail.setImage(new Image(futurePost.getThumbnailUrl()));
-        }
+
+        System.out.println("\nfuturePostIndex: " + (futureIndex));
+        RedditPost futurePost = n.posts.get(futureIndex);
+        this.futurePostThumbnail.setImage(new Image(futurePost.getThumbnailUrl()));
+        this.futurePostTitle.setText(futurePost.getTitle());
+//        if (previousIndex == -1)
+//        {
+//            this.previousPostThumbnail.setImage(new Image("http://i.imgur.com/S6uyoKG.jpg"));
+//        }
+//        else
+//        {
+//            System.out.println("\npreviousPostIndex: " + (currentPostIndex-1));
+//            RedditPost previousPost = n.posts.get(currentPostIndex-1);
+//            this.previousPostThumbnail.setImage(new Image(previousPost.getThumbnailUrl()));
+//        }
+//        if (futureIndex == n.getNumberOfPosts())
+//        {
+//            
+//            this.futurePostThumbnail.setImage(new Image("http://i.imgur.com/S6uyoKG.jpg"));
+//        }
+//        else
+//        {
+//            System.out.println("\nfuturePostIndex: " + (currentPostIndex+1));
+//            RedditPost futurePost = n.posts.get(currentPostIndex+1);
+//            this.futurePostThumbnail.setImage(new Image(futurePost.getThumbnailUrl()));
+//        }
         System.out.println("end of refreshPosts()\n------------");
     }
     

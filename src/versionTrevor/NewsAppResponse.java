@@ -13,10 +13,21 @@ public class NewsAppResponse
 	private Document doc;
 	private String toURL;
 	ArrayList<RedditPost> posts;
+    ArrayList<String> quotes;
         
 	
 	public NewsAppResponse(String url)
 	{
+            quotes = new ArrayList();
+            quotes.add("\"The reason we struggle with insecurity is because we compare "
+                    + "our behind-the-scenes with everyone else’s highlight reel.\" -Steve Furtick");
+            quotes.add("\"You can be the ripest, juiciest peach in the world, and there's still going to be somebody who hates peaches.\"" +
+                    "-Dita Von Teese");
+            quotes.add("\"Be the person your dog thinks you are.\" - J.W. Stephens");
+            quotes.add("\"If you're going through hell, keep going.\" -Winston Churchill");
+            quotes.add("\"Live your life so that when your feet hit the floor in the morning, the Devil goes 'Oh shit, he's up.' \"" +
+                    "-Dwayne 'The Rock' Johnson");
+            quotes.add("\"Please: Do everything you possibly can in one lifetime.\" -Kanye West");
 		this.toURL = url;
 		try
 		{
@@ -69,8 +80,17 @@ public class NewsAppResponse
 	    		Elements img = e.select("a.thumbnail.invisible-when-pinned.may-blank.outbound img");
 	    		String thumbnailUrl = img.attr("src").toString();
 	    		//System.out.println(thumbnailUrl);
-				posts.add(new RedditPost(e.attr("data-author"),e.select("div.entry div.top-matter p.title").text(), 
-					e.attr("data-url"), postDate, upvotes, thumbnailUrl));
+                        RedditPost p = new RedditPost(e.attr("data-author"),e.select("div.entry div.top-matter p.title").text(), 
+					e.attr("data-url"), postDate, upvotes, thumbnailUrl);
+                        if (p.getTitle().startsWith("Upliftingnews in review"))
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            posts.add(p);
+                        }
+//posts.add(new RedditPost(e.attr("data-author"),e.select("div.entry div.top-matter p.title").text(), e.attr("data-url"), postDate, upvotes, thumbnailUrl));
 			}
 		}
 	}

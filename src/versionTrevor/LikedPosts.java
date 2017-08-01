@@ -8,10 +8,16 @@ import javafx.scene.control.*;
 import javafx.scene.Scene;
 
 public class LikedPosts {
-    private ArrayList<RedditPost> likedPostArray;
-    public void addLikedPost(RedditPost p)
+    private static ArrayList<RedditPost> likedPostArray = new ArrayList<RedditPost>(30);
+    public static void addLikedPost(RedditPost p)
     {
+        System.out.print("Adding liked post");
         likedPostArray.add(p);
+    }
+    public static void removeLikedPost(RedditPost p)
+    {
+        System.out.print("Removing liked post");
+        likedPostArray.remove(p);
     }
     public static void display(String title)
     {
@@ -35,10 +41,13 @@ public class LikedPosts {
         else
         {
             //show liked posts
+            //show posts in vertical rows 
+            //displaying titles and clickable to go to url
             Label label = new Label();
             label.setText("FIXME: ADD POSTS");
             VBox layout = new VBox(20);
-            
+            layout.setMinSize(350, 150);
+            layout.getChildren().addAll(label);
             Scene scene = new Scene(layout);
             window.setScene(scene);
         }

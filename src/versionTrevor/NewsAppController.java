@@ -26,6 +26,11 @@ import java.net.URI;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Random;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class NewsAppController {
     private int currentPostIndex = 0;
@@ -128,6 +133,9 @@ public class NewsAppController {
         //NewsAppResponse n = new NewsAppResponse("https://www.reddit.com/r/UpliftingNews/");
         //System.out.println(n.posts.toString());
     	//n.loadPosts();
+        
+        masterWindowPane.setPadding(new Insets(10));
+        
         Random Dice = new Random();
         int randIndex = Dice.nextInt(n.quotes.size());
         randomQuote.setText(n.quotes.get(randIndex));
@@ -138,6 +146,7 @@ public class NewsAppController {
             
             @Override
             public void handle(ActionEvent event) {
+                likedCheckBox.setSelected(false); //reset check box
                 System.out.println("previousArticleButton pressed.");
                 if (currentPostIndex-1 < 0)
                 {
@@ -150,12 +159,21 @@ public class NewsAppController {
                 }
                 System.out.println("currentPostIndex is " + currentPostIndex);
                 refreshPosts();
+                if(n.posts.get(currentPostIndex).getLikeStatus())
+                {
+                    likedCheckBox.setSelected(true); 
+                }
+                else
+                {
+                    likedCheckBox.setSelected(false);
+                }
             }
         });
         nextArticleButton.setOnAction(new EventHandler<ActionEvent>() {
             
             @Override
             public void handle(ActionEvent event) {
+                likedCheckBox.setSelected(false); //reset check box
                 System.out.println("nextArticleButton pressed.");
                 if (currentPostIndex+1 >= n.getNumberOfPosts())
                 {
@@ -168,14 +186,36 @@ public class NewsAppController {
                 }
                 System.out.println("currentPostIndex is " + currentPostIndex);
                 refreshPosts();
+                if(n.posts.get(currentPostIndex).getLikeStatus())
+                {
+                    likedCheckBox.setSelected(true); 
+                }
+                else
+                {
+                    likedCheckBox.setSelected(false);
+                }
             }
         });
         likedCheckBox.setOnAction(new EventHandler<ActionEvent>() {
             
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("likedCheckButton pressed.");
-                System.out.println("Check button check status: " + likedCheckBox.isSelected());
+                //user pressed and resulted in like, so add current post to liked posts array
+                //FIXME: NEED TO REMEMBER CHECKED/UNCHECKED STATUS
+                if(likedCheckBox.isSelected()) {
+                    n.posts.get(currentPostIndex).like();
+                    ++numLiked;
+                    System.out.println("likedCheckButton pressed.");
+                    System.out.println("Check button check status: " + likedCheckBox.isSelected());
+                    LikedPosts.addLikedPost(n.posts.get(currentPostIndex));
+                }
+                else
+                {
+                    //user pressed and resulted in dislike, so remove current post from liked posts array
+                    n.posts.get(currentPostIndex).dislike();
+                    --numLiked;
+                    LikedPosts.removeLikedPost(n.posts.get(currentPostIndex));
+                }
             }
         });
         browserLink.setOnAction(new EventHandler<ActionEvent>() {
@@ -221,6 +261,7 @@ public class NewsAppController {
                     System.out.println("clicked on liked posts archive");
                     LikedPosts.display("Liked Posts Archive");
         });
+        aboutThisApp.setOnAction(e -> displayAbout("About"));
         
         refreshPosts();
         
@@ -292,5 +333,27 @@ public class NewsAppController {
     public NewsAppController()
     {
         System.out.println("NewsAppController()");
+    }
+    
+    public void displayAbout(String title)
+    {
+        Stage window = new Stage();
+        window.setTitle(title);
+        
+        Label appInfo_1 = new Label();
+        Label appInfo_2 = new Label();
+        Label appInfo_3 = new Label("News feed provided by www.reddit.com/upliftingnews/");
+        
+        appInfo_1.setText("Created by Marcos Miranda and Trevor Dinh");
+        appInfo_2.setText("2017 All rights reserved");
+        
+        VBox layout = new VBox(20);
+        layout.setMinSize(350, 150);
+        layout.getChildren().addAll(appInfo_1, appInfo_3, appInfo_2);
+        layout.setAlignment(Pos.CENTER);
+        
+        Scene scene = new Scene(layout);
+        window.setScene(scene);
+        window.show();
     }
 }

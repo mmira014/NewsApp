@@ -83,6 +83,14 @@ public class RedditPost
                 this.retrieveDomain();
                 this.postNumber = ++postCount;
 	}
+        public void like()
+        {
+            this.is_liked = true;
+        }
+        public void dislike()
+        {
+            this.is_liked = false;
+        }
         
 //	public static void main(String[] args) throws Exception {
 //		RedditPost test = new RedditPost("a", "Dog revived with oxygen after rescue from burning house gets visit from hero firefighter (usatoday.com)", "c", "d", 5, "e");

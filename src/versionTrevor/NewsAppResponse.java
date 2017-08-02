@@ -13,11 +13,21 @@ public class NewsAppResponse
 	private Document doc;
 	private String toURL;
 	ArrayList<RedditPost> posts;
+	ArrayList<RedditPost> likedPostArray;
     ArrayList<String> quotes;
+    public void addLikedPost(RedditPost p)
+	{
+		likedPostArray.add(p);
+	}
         
+    public Boolean removeLikedPost(RedditPost p)
+    {
+        return likedPostArray.remove(p);
+    }
 	
 	public NewsAppResponse(String url)
 	{
+            likedPostArray = new ArrayList();
             quotes = new ArrayList();
             quotes.add("\"The reason we struggle with insecurity is because we compare "
                     + "our behind-the-scenes with everyone else’s highlight reel.\" -Steve Furtick");
@@ -57,6 +67,7 @@ public class NewsAppResponse
 
 	public void loadPosts()
 	{
+            
 		posts = new ArrayList<RedditPost>();
 		NewsAppResponse htmlResult = new NewsAppResponse("https://www.reddit.com/r/UpliftingNews/");
 		Document d = htmlResult.getHTMLResponse();

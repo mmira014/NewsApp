@@ -207,14 +207,20 @@ public class NewsAppController {
                     ++numLiked;
                     System.out.println("likedCheckButton pressed.");
                     System.out.println("Check button check status: " + likedCheckBox.isSelected());
-                    LikedPosts.addLikedPost(n.posts.get(currentPostIndex));
+                    
+                    System.out.println(n.posts.get(currentPostIndex));
+                    n.addLikedPost(n.posts.get(currentPostIndex));
+                    System.out.println("Number of liked posts is " + n.likedPostArray.size());
                 }
                 else
                 {
+                    System.out.println("Check button check status: " + likedCheckBox.isSelected());
                     //user pressed and resulted in dislike, so remove current post from liked posts array
                     n.posts.get(currentPostIndex).dislike();
                     --numLiked;
-                    LikedPosts.removeLikedPost(n.posts.get(currentPostIndex));
+                    
+                    n.removeLikedPost(n.posts.get(currentPostIndex));
+                    System.out.println("Number of liked posts is " + n.likedPostArray.size());
                 }
             }
         });
@@ -330,10 +336,6 @@ public class NewsAppController {
         System.out.println("end of refreshPosts()\n------------");
     }
     
-    public NewsAppController()
-    {
-        System.out.println("NewsAppController()");
-    }
     
     public void displayAbout(String title)
     {

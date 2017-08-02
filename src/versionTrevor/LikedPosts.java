@@ -8,16 +8,21 @@ import javafx.scene.control.*;
 import javafx.scene.Scene;
 
 public class LikedPosts {
-    private static ArrayList<RedditPost> likedPostArray = new ArrayList<RedditPost>(30);
-    public static void addLikedPost(RedditPost p)
+    private ArrayList<RedditPost> likedPostArray;
+    public void setArray(ArrayList<RedditPost> copyPostArray)
     {
-        System.out.print("Adding liked post");
-        likedPostArray.add(p);
+        likedPostArray = copyPostArray;
     }
-    public static void removeLikedPost(RedditPost p)
+    public Boolean removePost(int postNumber)
     {
-        System.out.print("Removing liked post");
-        likedPostArray.remove(p);
+        for (RedditPost p : likedPostArray)
+        {
+            if (p.getPostNumber() == postNumber)
+            {
+                return likedPostArray.remove(p);
+            }
+        }
+        return false;
     }
     public static void display(String title)
     {

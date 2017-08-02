@@ -13,7 +13,7 @@ public class NewsAppResponse
 	private Document doc;
 	private String toURL;
 	ArrayList<RedditPost> posts;
-	ArrayList<RedditPost> likedPostArray;
+	public static ArrayList<RedditPost> likedPostArray;
     ArrayList<String> quotes;
     public void addLikedPost(RedditPost p)
 	{

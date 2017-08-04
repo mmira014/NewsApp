@@ -32,6 +32,10 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ *
+ * @author Trevor
+ */
 public class NewsAppController {
     private int currentPostIndex = 0;
     public static int numLiked = 0;
@@ -363,7 +367,10 @@ public class NewsAppController {
             System.out.println("end of refreshPosts()\n------------");
     }
     
-    
+    /**
+     *
+     * @param title Title of the About window for NewsApp
+     */
     public void displayAbout(String title)
     {
         Stage window = new Stage();

@@ -7,28 +7,49 @@ import org.jsoup.*;
 import org.jsoup.nodes.*;
 import org.jsoup.select.Elements;
 
-
+/**
+ *
+ * @author Trevor
+ */
 public class NewsAppResponse
 {
 	private Document doc;
 	private String toURL;
 	ArrayList<RedditPost> posts;
-	public static ArrayList<RedditPost> likedPostArray;
+
+    /**
+     *
+     */
+    public static ArrayList<RedditPost> likedPostArray;
     ArrayList<String> quotes;
+
+    /**
+     *
+     * @param p Adds a RedditPost to the ArrayList of liked posts
+     */
     public void addLikedPost(RedditPost p)
 	{
 		likedPostArray.add(p);
 	}
         
+    /**
+     *
+     * @param p RedditPost that needs to be removed from the likedPostArray
+     * @return Whether the post is successfully removed from likedPostArray or not.
+     */
     public Boolean removeLikedPost(RedditPost p)
     {
         return likedPostArray.remove(p);
     }
 	
-	public NewsAppResponse(String url)
+    /**
+     *
+     * @param url Takes a url to parse using jsoup (Default is reddit.com/r/upliftingnews)
+     */
+    public NewsAppResponse(String url)
 	{
-            likedPostArray = new ArrayList();
-            quotes = new ArrayList();
+            likedPostArray = new ArrayList<>();
+            quotes = new ArrayList<>();
             quotes.add("\"The reason we struggle with insecurity is because we compare "
                     + "our behind-the-scenes with everyone else’s highlight reel.\" -Steve Furtick");
             quotes.add("\"You can be the ripest, juiciest peach in the world, and there's still going to be somebody who hates peaches.\"" +
@@ -50,22 +71,39 @@ public class NewsAppResponse
 			e.printStackTrace();
 		}
 	}
-	public String getURL()
+
+    /**
+     *
+     * @return Returns the URL in string form
+     */
+    public String getURL()
 	{
 		return toURL;
 	}
-	public String getHTMLResponseString()
+
+    /**
+     *
+     * @return Returns the HTML response of the url when connected to using Jsoup as a string
+     */
+    public String getHTMLResponseString()
 	{
 	return this.doc.toString();
 	}
 	
-	public Document getHTMLResponse()
+    /**
+     *
+     * @return Returns the HTML result called by Jsoup when connecting to a url
+     */
+    public Document getHTMLResponse()
 	{
 		return this.doc;
 		
 	}
 
-	public void loadPosts()
+    /**
+     *
+     */
+    public void loadPosts()
 	{
             
 		posts = new ArrayList<RedditPost>();
@@ -106,17 +144,29 @@ public class NewsAppResponse
 		}
 	}
 	
-	public ArrayList<RedditPost> getAllPosts()
+    /**
+     *
+     * @return Returns the array of all RedditPosts
+     */
+    public ArrayList<RedditPost> getAllPosts()
 	{
 		return posts;
 	}
 	
-	public int getNumberOfPosts()
+    /**
+     *
+     * @return Returns the number of RedditPosts
+     */
+    public int getNumberOfPosts()
 	{
 		return posts.size();
 	}
 	
-	
+    /**
+     *
+     * @param args The main function is here to test that NewsAppResponse retrieves an appropriate HTML response and stores it in a test array
+     * @throws Exception General exception if the client isn't connected to the internet
+     */
     public static void main(String[] args) throws Exception {
     	NewsAppResponse n = new NewsAppResponse("https://www.reddit.com/r/UpliftingNews/");
     	n.loadPosts();

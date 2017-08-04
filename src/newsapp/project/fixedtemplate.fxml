@@ -51,7 +51,7 @@
       <Label fx:id="futurePostTitle" alignment="CENTER" contentDisplay="CENTER" prefHeight="127.0" prefWidth="268.0" text="title" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
       <MenuButton fx:id="dropdownMenu" mnemonicParsing="false" prefHeight="25.0" prefWidth="132.0" text="View" GridPane.valignment="TOP">
          <items>
-            <MenuItem fx:id="postedToday" mnemonicParsing="false" text="Today's News" />
+            
             <MenuItem fx:id="likedPosts" mnemonicParsing="false" text="Liked news articles" />
             <MenuItem fx:id="aboutThisApp" mnemonicParsing="false" text="About" />
          </items>

@@ -1,6 +1,11 @@
 package newsapp.project;
 import java.util.regex.*;
 import java.util.Comparator;
+
+/**
+ *
+ * @author Trevor
+ */
 public class RedditPost
 {
         private static int postCount = 0;
@@ -13,35 +18,75 @@ public class RedditPost
 	private String thumbnail_url;
 	private String domain_url;
         private Boolean is_liked;
-	public int getPostNumber()
+
+    /**
+     *
+     * @return The unique number of a given RedditPost, incremented by postCount
+     */
+    public int getPostNumber()
         {
             return postNumber;
         }
-	public String getAuthor()
+
+    /**
+     *
+     * @return The author of the RedditPost.
+     */
+    public String getAuthor()
 	{
 		return this.author;
 	}
-	public String getTitle()
+
+    /**
+     *
+     * @return The title of the RedditPost.
+     */
+    public String getTitle()
 	{
 		return this.title;
 	}
-	public String getDatetime()
+
+    /**
+     *
+     * @return The date and time the RedditPost was posted on r/UpliftingNews.
+     */
+    public String getDatetime()
 	{
 		return this.datetime;
 	}
-	public int getUpvotes()
+
+    /**
+     *
+     * @return The RedditPost's net upvotes.
+     */
+    public int getUpvotes()
 	{
 		return this.upvotes;
 	}
-	public String getUrl()
+
+    /**
+     *
+     * @return The URL of the article.
+     */
+    public String getUrl()
 	{
 		return this.url;
 	}
-	public String getThumbnailUrl()
+
+    /**
+     *
+     * @return The thumbnail of the article.
+     */
+    public String getThumbnailUrl()
 	{
 		return this.thumbnail_url;
 	}
-	public String getDomainUrl()
+
+    /**
+     *
+     * @return The domain URL of the article.
+     */
+    public String getDomainUrl()
 	{
 		return this.domain_url;
 	}
@@ -49,11 +94,21 @@ public class RedditPost
 	{
 		return "RedditPost by " + author + " titled " + title + "; posted on " + datetime + " and has " + upvotes + " upvotes";
 	}
-        public Boolean getLikeStatus()
+
+    /**
+     *
+     * @return Whether the post is liked or not in the GUI.
+     */
+    public Boolean getLikeStatus()
         {
             return is_liked;
         }
-        public static int getNumberOfPosts()
+
+    /**
+     *
+     * @return Gets the number of posts retrieved from Reddit.
+     */
+    public static int getNumberOfPosts()
         {
             return postCount;
         }
@@ -71,7 +126,17 @@ public class RedditPost
 		
 		//regex \(([^\)]+)\); compile and match
 	}
-	public RedditPost(String author, String title, String url, String datetime, int upvotes, String thumbnail_url)
+
+    /**
+     *
+     * @param author Author of the RedditPost
+     * @param title Title of the Post
+     * @param url URL to the article
+     * @param datetime Date and time posted
+     * @param upvotes Net upvotes
+     * @param thumbnail_url URL of its displayed thumbnail
+     */
+    public RedditPost(String author, String title, String url, String datetime, int upvotes, String thumbnail_url)
 	{
 		this.author = author;
 		this.title = title;
@@ -83,11 +148,19 @@ public class RedditPost
                 this.retrieveDomain();
                 this.postNumber = ++postCount;
 	}
-        public void like()
+
+    /**
+     *
+     */
+    public void like()
         {
             this.is_liked = true;
         }
-        public void dislike()
+
+    /**
+     *
+     */
+    public void dislike()
         {
             this.is_liked = false;
         }
